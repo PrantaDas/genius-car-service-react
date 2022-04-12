@@ -24,9 +24,9 @@ const Services = () => {
 
             </div>
             <div className="services-container">
-            {
+            {/* {
                 services.map(service=><Service key={service.id} service={service}></Service>)
-            }
+            } */}
             </div>
             </div>
         </div>
