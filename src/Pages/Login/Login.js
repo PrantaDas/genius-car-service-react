@@ -3,16 +3,18 @@ import './Login.css'
 
 import GoogleLogo from "../../images/logo/google.svg"
 import { Button, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 const Login = () => {
     const emailRef=useRef('');
     const passwordRef=useRef('');
+    const location =useLocation();
 
     const navigate=useNavigate();
 
+    let from = location.state?.from?.pathname || "/";
     const [
         signInWithEmailAndPassword,
         user,
@@ -25,7 +27,8 @@ const Login = () => {
         const emailInput=emailRef.current.value;
         const passInput=passwordRef.current.value;
         signInWithEmailAndPassword(emailInput,passInput);
-        navigate('/');
+        // navigate('/');
+        navigate(from, { replace: true });
         console.log(emailInput,passInput);
     }
 
