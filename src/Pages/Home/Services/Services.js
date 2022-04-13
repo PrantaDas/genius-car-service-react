@@ -5,7 +5,7 @@ import './Services.css';
 
 const Services = () => {
    
-  const [services,setServices]=useState({});
+  const [services,setServices]=useState([]);
 
   useEffect(()=>{
       fetch('services.json')
@@ -14,7 +14,7 @@ const Services = () => {
           console.log(data);
           setServices(data);
       })
-  },[])
+  },[services])
 
     return (
         <div className='container'>
@@ -24,9 +24,9 @@ const Services = () => {
 
             </div>
             <div className="services-container">
-            {/* {
+            {
                 services.map(service=><Service key={service.id} service={service}></Service>)
-            } */}
+            }
             </div>
             </div>
         </div>

@@ -6,7 +6,9 @@ const Service = ({ service }) => {
     const { name, img, description, price } = service;
     return (
         <div className='single-service mt-5'>
-            <img className='w-100' src={img} alt="" />
+            <div>
+                <img className='w-100' src={img} alt="" />
+            </div>
             <h4>{name}</h4>
             <p>Price: ${price}</p>
             <p><small>{description}</small></p>
