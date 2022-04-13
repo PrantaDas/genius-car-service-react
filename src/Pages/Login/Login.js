@@ -3,17 +3,29 @@ import './Login.css'
 
 import GoogleLogo from "../../images/logo/google.svg"
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Login = () => {
     const emailRef=useRef('');
     const passwordRef=useRef('');
 
+    const navigate=useNavigate();
+
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useSignInWithEmailAndPassword(auth);
+
     const handleSubmit=(event)=>{
-        event.prevent.default();
+        event.preventDefault();
         const emailInput=emailRef.current.value;
         const passInput=passwordRef.current.value;
-
+        signInWithEmailAndPassword(emailInput,passInput);
+        navigate('/');
         console.log(emailInput,passInput);
     }
 

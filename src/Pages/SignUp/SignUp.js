@@ -1,30 +1,44 @@
-import React, { useRef } from 'react';
-
-
+import React, { useRef, useState } from 'react';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import './SignUp.css'
 import GoogleLogo from "../../images/logo/google.svg"
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 
 const SignUp = () => {
-    const emailRef=useRef('');
-    const passwordRef=useRef('');
 
-    const handleSubmit=(event)=>{
-        event.prevent.default();
-        const emailInput=emailRef.current.value;
-        const passInput=passwordRef.current.value;
+    const emailRef = useRef('');
+    const passwordRef = useRef('');
+    const navigate = useNavigate();
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
 
-        console.log(emailInput,passInput);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+
+        console.log(email, password);
+
+        createUserWithEmailAndPassword(email, password);
+        console.log(error);
+        navigate('/');
+        console.log(user);
     }
+
     return (
         <div className='container w-50 mx-auto mt-5 shadow-lg p-5 rounded-3 border'>
             <h2 className='text-primary fw-bold form-title'>Please Register!!</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control ref={emailRef} type="email" placeholder="Enter email" required/>
+                    <Form.Control ref={emailRef} type="email" placeholder="Enter email" required />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -32,7 +46,7 @@ const SignUp = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control ref={passwordRef} type="password" placeholder="Password" required/>
+                    <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />

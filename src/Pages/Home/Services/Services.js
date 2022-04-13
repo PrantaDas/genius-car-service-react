@@ -14,7 +14,7 @@ const Services = () => {
           console.log(data);
           setServices(data);
       })
-  },[services])
+  },[])
 
     return (
         <div id='services' className='container'>

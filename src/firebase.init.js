@@ -13,14 +13,12 @@ const firebaseConfig = {
   projectId: "genius-car-services-9756e",
   storageBucket: "genius-car-services-9756e.appspot.com",
   messagingSenderId: "1055792507848",
-  appId: "1:1055792507848:web:b53c681a9e4bdfa1c86efd",
-  measurementId: "G-11J69YH17F"
+  appId: "1:1055792507848:web:bde33292238ff2d4c86efd",
+  measurementId: "G-JBS6X8XM2G"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-
 const auth=getAuth(app);
 
 const analytics = getAnalytics(app);
