@@ -1,0 +1,127 @@
+.form-container {
+    width: 500px;
+    height: 600px;
+    margin: 50px auto;
+    border: 1px solid #95A0A7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.form-container h2 {
+    text-align: center;
+}
+
+.form-title {
+    font-size: 35px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.0025em;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin: 5px 5px;
+}
+
+.input-group input {
+    width: 415px;
+    height: 55px;
+    border: 1px solid #95A0A7;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.form-submit {
+    width: 415px;
+    height: 45px;
+    background: rgba(255, 153, 0, 0.3);
+    border-radius: 5px;
+    outline: 0;
+    border: none;
+    font-size: 22px;
+}
+
+.bottom-text {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.0025em;
+    color: rgba(255, 153, 0, 1);
+    text-decoration: none;
+}
+
+.form-container p {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.0025em;
+    color: rgba(42, 65, 79, 1);
+    text-align: center;
+}
+
+.alter-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alter-options {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.005em;
+    margin-top: 15px;
+    color: #95A0A7;
+}
+
+.hr-line {
+    width: 145px;
+    height: 0px;
+    border: 1px solid #95A0A7;
+
+}
+
+.another-btn {
+    width: 415px;
+    height: 55px;
+}
+
+.another-btn button img {
+    display: block;
+    margin-right: 5px;
+}
+
+.another-btn button {
+    width: 415px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.005em;
+    color: #2A414F;
+    background-color: white;
+    border: 1px solid rgba(149, 160, 167, 1);
+}
+
+.another-btn button:hover{
+    cursor: pointer;
+}
