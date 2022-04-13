@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import './SignUp.css'
 import GoogleLogo from "../../images/logo/google.svg"
 import { Button, Form } from 'react-bootstrap';
@@ -8,7 +8,6 @@ import auth from '../../firebase.init';
 
 
 const SignUp = () => {
-
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const navigate = useNavigate();
@@ -16,7 +15,7 @@ const SignUp = () => {
         createUserWithEmailAndPassword,
         user,
         loading,
-        error,
+        error
     ] = useCreateUserWithEmailAndPassword(auth);
 
     const handleSubmit = (event) => {
@@ -27,8 +26,11 @@ const SignUp = () => {
         console.log(email, password);
 
         createUserWithEmailAndPassword(email, password);
-        console.log(error);
         navigate('/');
+        
+        // console.log(user?.displayName);
+    }
+    if(user){
         console.log(user);
     }
 

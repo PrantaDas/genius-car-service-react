@@ -17,7 +17,7 @@ const Login = () => {
         signInWithEmailAndPassword,
         user,
         loading,
-        error,
+        error
       ] = useSignInWithEmailAndPassword(auth);
 
     const handleSubmit=(event)=>{
