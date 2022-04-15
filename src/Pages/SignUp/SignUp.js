@@ -1,13 +1,17 @@
 import React, { useRef, useState } from 'react';
-import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import './SignUp.css'
 import GoogleLogo from "../../images/logo/google.svg"
 import { Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import { async } from '@firebase/util';
 
 
 const SignUp = () => {
+    const [agree, setAgree] = useState(false);
+
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const navigate = useNavigate();
@@ -16,21 +20,26 @@ const SignUp = () => {
         user,
         loading,
         error
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-    const handleSubmit = (event) => {
+    const handleSubmit =async(event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-
+        // const agree = event.target.terms.checked;
         console.log(email, password);
 
-        createUserWithEmailAndPassword(email, password);
+       await createUserWithEmailAndPassword(email, password);
         navigate('/');
-        
+        // await updateProfile({ displayName });
+          alert('Updated profile');
+
+
+
         // console.log(user?.displayName);
     }
-    if(user){
+    if (user) {
         console.log(user);
     }
 
@@ -50,14 +59,15 @@ const SignUp = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
+                <input onClick={() => setAgree(!agree)} className='me-2' type="checkbox" name="terms" id="terms" />
+                <label className={agree ? 'text-primary' : 'text-danger'} htmlFor="terms"><small>Accept Our Terms & Conditions. <span className='text-danger fw-bolder' role="button">Read the T&C</span></small></label>
+                <br />
+                <Button className={agree ? 'active' : 'disabled'} variant="primary" type="submit">
                     Sign Up
                 </Button>
             </Form>
             <p className='alter-options'><small>Already Have an Account?</small><Link className='text-decoration-none ps-1' to='/login'>Login Here</Link></p>
+            <SocialLogin></SocialLogin>
         </div>
     );
 };
