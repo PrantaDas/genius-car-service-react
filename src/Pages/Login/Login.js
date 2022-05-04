@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import "./Login.css";
-import GoogleLogo from "../../images/logo/google.svg";
 import { Button, Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -9,7 +8,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import SocialLogin from "../SocialLogin/SocialLogin";
-import { async } from "@firebase/util";
+import axios from "axios";
 
 const Login = () => {
   const emailRef = useRef("");
@@ -24,11 +23,16 @@ const Login = () => {
 
   const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const emailInput = emailRef.current.value;
     const passInput = passwordRef.current.value;
-    signInWithEmailAndPassword(emailInput, passInput);
+    await signInWithEmailAndPassword(emailInput, passInput);
+
+
+    const { data } = await axios.post('http://localhost:5000/login', { emailInput });
+    console.log(data);
+    localStorage.setItem('accessToken', data.accessToken);
     // navigate('/');
     navigate(from, { replace: true });
     console.log(emailInput, passInput);
